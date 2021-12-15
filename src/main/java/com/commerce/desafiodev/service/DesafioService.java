@@ -23,20 +23,20 @@ public class DesafioService {
 	public void initialLoad() throws JsonProcessingException {
 
 		int i = 1;
-		while (i <= 2) {
+		while (true) {
 			try {
 				String json = desafioClient.getNumbers(i);
 
 				Numero n = objectMapper.readValue(json, Numero.class);
 
-				/*if (n.getNumbers().length <= 0) {
+				if (n.getNumbers().length <= 0) {
 					break;
-				}*/
+				}
 
 				for (int j = 0; j < n.getNumbers().length; j++) {
 					Double[] array = n.getNumbers();
 					ConjuntoNumero conjuntoNumero = new ConjuntoNumero(array[j]);
-					
+
 					numeroRepository.save(conjuntoNumero);
 				}
 				System.out.println("SUCCESS ==> " + i);
