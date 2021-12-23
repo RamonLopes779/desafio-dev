@@ -1,5 +1,7 @@
 package com.commerce.desafiodev.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,7 +36,7 @@ public class DesafioService {
 				}
 
 				for (int j = 0; j < n.getNumbers().length; j++) {
-					Double[] array = n.getNumbers();
+					BigDecimal[] array = n.getNumbers();
 					ConjuntoNumero conjuntoNumero = new ConjuntoNumero(array[j]);
 
 					numeroRepository.save(conjuntoNumero);

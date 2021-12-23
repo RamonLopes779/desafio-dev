@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostConstructService {
 
+	//Classe responsável por iniciar a classe DesafioService para buscar todos os números da API
+	
 	@Autowired
 	DesafioService desafioService;
 

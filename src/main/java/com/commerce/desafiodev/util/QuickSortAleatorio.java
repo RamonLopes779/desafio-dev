@@ -1,11 +1,9 @@
 package com.commerce.desafiodev.util;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 /*
  * Algoritmo de ordenação QuickSort com pivô aleatório com partição de Cormen
@@ -16,83 +14,77 @@ import java.util.stream.DoubleStream;
  */
 public class QuickSortAleatorio {
 
-	private double[] array;
-	//private BigDecimal[] arrayBig;
+	private BigDecimal[] arrayBig;
 	private int inicio;
 	private int fim;
+	List<BigDecimal> arrayAux;
 
-	public QuickSortAleatorio(double[] array, int inicio, int fim) {
-		this.array = array;
+	public QuickSortAleatorio(BigDecimal[] array, int inicio, int fim) {
+		this.arrayBig = array;
 		this.inicio = inicio;
 		this.fim = fim;
 	}
 
-	public List<Double> ordenarRetorno() {
+	public List<BigDecimal> ordenarRetorno() {
 
-		quickSortAleatorio(array, inicio, fim);
+		quickSortAleatorio(arrayBig, inicio, fim);
 
-		List<Double> arrayAux = DoubleStream.of(array).boxed().collect(Collectors.toList());
+		List<BigDecimal> arrayAux = Arrays.asList(arrayBig);
 
 		return arrayAux;
 
 	}
 
-	private static int particao(double[] array, int inicio, int fim) {
+	private static int particao(BigDecimal[] arrayBig, int inicio, int fim) {
 
 		// Escolhe o índece aleatoriamente
 		Random numeroRandom = new Random();
 		int indexRandom;
-		Double pivo;
+		BigDecimal pivo;
 		int i;
 
 		indexRandom = numeroRandom.nextInt(fim - inicio + 1) + inicio;
 
-		troca(array, indexRandom, fim);
+		troca(arrayBig, indexRandom, fim);
 
-		pivo = array[fim];
+		pivo = arrayBig[fim];
 		i = inicio - 1;
 
 		// Os elementos menores ou iguais ao pivô são colocados na partição a esquerda
 		for (int j = inicio; j <= fim - 1; j++) {
-			if (array[j] <= pivo) {
+			if (arrayBig[j].compareTo(pivo) <= 0) {
 				i = i + 1;
-				troca(array, i, j);
+				troca(arrayBig, i, j);
 			}
 		}
 
-		troca(array, i + 1, fim);
+		troca(arrayBig, i + 1, fim);
 		return i + 1;
 
 	}
 
 	// Realiza as trocas do elementos
-	private static void troca(double[] array, int inicio, int fim) {
-		Double aux = array[inicio];
-		array[inicio] = array[fim];
-		array[fim] = aux;
+	private static void troca(BigDecimal[] arrayBig, int inicio, int fim) {
+		BigDecimal aux = arrayBig[inicio];
+		arrayBig[inicio] = arrayBig[fim];
+		arrayBig[fim] = aux;
 	}
 
 	// Executa a partição e a ordenação dos elementos
-	public static void quickSortAleatorio(double[] array, int inicio, int fim) {
+	public static void quickSortAleatorio(BigDecimal[] arrayBig, int inicio, int fim) {
 		int aux;
 
 		if (inicio < fim) {
 
 			// Realiza a partição
-			aux = particao(array, inicio, fim);
+			aux = particao(arrayBig, inicio, fim);
 
 			// Ordena a partição a esquerda
-			quickSortAleatorio(array, inicio, aux - 1);
+			quickSortAleatorio(arrayBig, inicio, aux - 1);
 			// Ordena a partição a direita
-			quickSortAleatorio(array, aux + 1, fim);
+			quickSortAleatorio(arrayBig, aux + 1, fim);
 		}
 
 	}
 
-	/* Teste
-	 * public static List<BigDecimal> toBigDecimalList(double... list) {
-	 * List<BigDecimal> result = new ArrayList<BigDecimal>(list.length); for (int i
-	 * = 0; i < list.length; i++) { result.add(BigDecimal.valueOf(list[i])); }
-	 * return result; }
-	 */
 }

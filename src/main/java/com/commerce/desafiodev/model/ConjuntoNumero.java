@@ -3,6 +3,8 @@ package com.commerce.desafiodev.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,10 +16,10 @@ public class ConjuntoNumero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "numero")
-    private Double numero;
+    @Column(name = "numero", precision = 25, scale = 20)
+    private BigDecimal numero;
 
-    public ConjuntoNumero(Double numero) {
+    public ConjuntoNumero(BigDecimal numero) {
         this.numero = numero;
     }
     
